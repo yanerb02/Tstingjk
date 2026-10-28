@@ -1302,11 +1302,11 @@ function buildReport(){
   }else if(ui.rep.jenis==='kinerja'){
     var logs=db.logs.filter(function(l){return l.tgl>=r[0]&&l.tgl<=r[1]}).sort(byTime),last='',n=0,tot=0,days={},nl=0;
     out.title='Laporan Kinerja Harian';out.sheet='Kinerja Harian';
-    out.head=['No','Hari / Tanggal','Waktu','Uraian kegiatan','Output','Keterangan','Bukti dukung'];out.widths=[5,24,14,56,14,34,48];
+    out.head=['No','Hari / Tanggal','Waktu','Uraian kegiatan','Output','Keterangan','RHK','Bukti dukung'];out.widths=[5,24,14,50,14,30,44,44];
     out.rows=logs.map(function(l){n++;tot+=dur(l);days[l.tgl]=1;var w=workById(l.workId),items=[],hasUrl=false;
       logFileIds(l).forEach(function(id){var fl=fileById(id);items.push(fileItem(fl));if(fileUrl(fl))hasUrl=true});if(hasUrl)nl++;
       if(l.bukti)items.push({n:l.bukti,u:isUrl(l.bukti)?l.bukti:''});
-      var row=[n,l.tgl!==last?fmtLong(l.tgl):'',l.mulai+' - '+l.selesai,l.uraian,l.output?(l.output+' '+(l.satuan||'')).trim():'',w?w.judul:'',items.length?{items:items}:''];last=l.tgl;return row});
+      var row=[n,l.tgl!==last?fmtLong(l.tgl):'',l.mulai+' - '+l.selesai,l.uraian,l.output?(l.output+' '+(l.satuan||'')).trim():'',w?w.judul:'',rhkOf(l)?'RHK '+rhkNo(rhkOf(l))+': '+rhkOf(l).teks:'-',items.length?{items:items}:''];last=l.tgl;return row});
     out.summary='Total '+logs.length+' kegiatan pada '+Object.keys(days).length+' hari, '+fmtDur(tot)+'. '+nl+' kegiatan memiliki tautan bukti dukung.';
   }else{
     out.title='Rekap Pekerjaan';out.sheet='Rekap Pekerjaan';
