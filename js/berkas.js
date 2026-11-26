@@ -3,7 +3,7 @@
 function driveBanner(){return driveCfg()?'':'<div class="banner"><span>Hubungkan Google Drive supaya lampiran surat langsung tersimpan di Drive-mu dan laporan berisi tautan yang bisa diklik.</span><button class="btn sm primary" type="button" data-act="driveLogin">Login dengan Google</button></div>'}
 function renderFiles(){
   $('#view').innerHTML='<div class="page-head"><div><h1>Berkas</h1><p>Catat di mana surat dan bahan disimpan, atau lampirkan filenya langsung. Cari dengan satu kata.</p></div><button class="btn primary" type="button" data-act="newFile">'+ic('plus')+'Catat berkas</button></div>'
-   +driveBanner()+'<div class="toolbar"><div class="search">'+ic('search')+'<label class="sr" for="fq">Cari berkas</label><input type="search" id="fq" placeholder="Cari nama, nomor surat, lokasi, atau pekerjaan" value="'+esc(ui.fq)+'"><button class="vmic sm" type="button" data-act="voice" aria-label="Cari dengan suara">'+ic('mic')+'</button></div>'
+   +driveBanner()+'<div class="toolbar"><div class="search">'+ic('search')+'<label class="sr" for="fq">Cari berkas</label><input type="search" id="fq" placeholder="Cari nama, nomor surat, lokasi, atau pekerjaan" value="'+esc(ui.fq)+'"></div>'
    +'<div class="seg" style="min-width:190px"><button type="button" data-fv="folder" aria-pressed="'+(ui.fv==='folder')+'">Folder</button><button type="button" data-fv="daftar" aria-pressed="'+(ui.fv==='daftar')+'">Daftar</button></div>'
    +'<label class="sr" for="fj">Jenis berkas</label><select id="fj" style="width:auto;min-width:160px"><option value="">Semua jenis</option>'+JENIS.map(function(j){return '<option'+(ui.fj===j?' selected':'')+'>'+j+'</option>'}).join('')+'</select></div><div id="flist"></div>';
   paintFileList();
